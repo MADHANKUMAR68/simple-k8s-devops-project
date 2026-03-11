@@ -14,11 +14,10 @@ spec:
         app: simple-k8s-app
     spec:
       containers:
-      - name: simple-k8s-app
-        image: simple-k8s-app:v1
-        imagePullPolicy: Never
-        ports:
-        - containerPort: 80
-        envFrom:
-        - configMapRef:
-            name: app-config
+        - name: simple-k8s-app
+          image: madhan68/simple-k8s-app:latest
+          ports:
+            - containerPort: 80
+          envFrom:
+            - configMapRef:
+                name: app-config
