@@ -16,6 +16,7 @@ spec:
       containers:
         - name: simple-k8s-app
           image: madhan68/simple-k8s-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
           envFrom:
