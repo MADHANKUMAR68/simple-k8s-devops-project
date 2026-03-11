@@ -50,23 +50,39 @@ This project was built to practice core DevOps concepts in a simple and practica
 
 ### High-Level Architecture
 
-``text
+
 Developer
+
    ↓
+   
 GitHub Push
+
    ↓
+   
 GitHub Actions CI/CD
+
    ↓
+   
 Build Docker Image
+
    ↓
+   
 Push Image to Docker Hub
+
    ↓
+   
 Kubernetes Deployment
+
    ↓
+   
 Pods (2 replicas)
+
    ↓
+   
 Kubernetes Service (NodePort)
+
    ↓
+   
 User Browser
 
 
