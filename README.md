@@ -16,31 +16,31 @@ It includes:
 - GitHub Actions CI/CD pipeline
 - Docker Hub image push
 - Troubleshooting common DevOps issues
-- 
+
 
 
 ## It solves problems like
 
 
-Eliminates manual application deployment by automating build and deployment using CI/CD.
+- Eliminates manual application deployment by automating build and deployment using CI/CD.
 
-Solves environment inconsistency issues by containerizing the application using Docker.
+- Solves environment inconsistency issues by containerizing the application using Docker.
 
-Provides scalable application deployment using Kubernetes pods and replicas.
+- Provides scalable application deployment using Kubernetes pods and replicas.
 
-Ensures high availability by running multiple application instances managed by Kubernetes.
+- Ensures high availability by running multiple application instances managed by Kubernetes.
 
-Simplifies application updates and version control through Docker image versioning.
+- Simplifies application updates and version control through Docker image versioning.
 
-Automates image build and registry push using GitHub Actions CI/CD pipeline.
+- Automates image build and registry push using GitHub Actions CI/CD pipeline.
 
-Enables consistent deployment across environments using Kubernetes manifests.
+- Enables consistent deployment across environments using Kubernetes manifests.
 
-Improves deployment reliability and repeatability using infrastructure-as-code practices.
+- Improves deployment reliability and repeatability using infrastructure-as-code practices.
 
-Demonstrates an end-to-end DevOps workflow from code commit to application deployment.
+- Demonstrates an end-to-end DevOps workflow from code commit to application deployment.
 
-This project was built to practice core DevOps concepts in a simple and practical way.
+- This project was built to practice core DevOps concepts in a simple and practical way.
 
 
 
@@ -51,62 +51,54 @@ This project was built to practice core DevOps concepts in a simple and practica
 ### High-Level Architecture
 
 
-Developer
+        Developer
 
-      ↓
+            ↓
    
-GitHub Push
+        GitHub Push
 
-   ↓
+             ↓
    
-GitHub Actions CI/CD
+    GitHub Actions CI/CD
 
-   ↓
+             ↓
    
-Build Docker Image
+      Build Docker Image
 
-   ↓
+             ↓
    
-Push Image to Docker Hub
+     Push Image to Docker Hub
 
-   ↓
+             ↓
    
-Kubernetes Deployment
+     Kubernetes Deployment
 
-   ↓
+             ↓
    
-Pods (2 replicas)
+       Pods (2 replicas)
 
-   ↓
+             ↓
    
-Kubernetes Service (NodePort)
+    Kubernetes Service (NodePort)
 
-   ↓
+             ↓
    
-User Browser
+        User Browser
 
 
 
 
 ## Tools Used
 
-*Docker 
-
-*Kubernetes
-
-Minikube
-
-kubectl
-
-Git
-
-GitHub
-
-GitHub Actions
-
-Docker Hub
-
-Nginx
+- Docker 
+- Kubernetes
+- Minikube
+- kubectl
+- Git
+- GitHub
+- GitHub Actions
+- Docker Hub
+- Nginx
 
 
 ### Project Implementation Steps
