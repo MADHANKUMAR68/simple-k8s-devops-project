@@ -53,7 +53,7 @@ This project was built to practice core DevOps concepts in a simple and practica
 
 Developer
 
-   ↓
+      ↓
    
 GitHub Push
 
@@ -87,39 +87,12 @@ User Browser
 
 
 
-## KUBERNETES ARCHITECTURE
-
-User
-  ↓
-Kubernetes Service (NodePort)
-  ↓
-Deployment
-  ↓
-Pods (2 replicas)
-  ↓
-Container (Nginx serving index.html)
-
-
-## CI/CD ARCHITECTURE
-
-Developer
-  ↓
-Push Code to GitHub
-  ↓
-GitHub Actions Workflow Triggered
-  ↓
-Docker Image Build
-  ↓
-Docker Image Push to Docker Hub
-  ↓
-Kubernetes uses latest image
-
 
 ## Tools Used
 
-Docker
+*Docker 
 
-Kubernetes
+*Kubernetes
 
 Minikube
 
