@@ -133,16 +133,25 @@ app/index.html
 </body>
 
 </html>
-Step 3 — Create Dockerfile
+
+
+### Step 3 — Create Dockerfile
+
 app/Dockerfile
 FROM nginx:alpine
 COPY index.html /usr/share/nginx/html/index.html
 EXPOSE 80
-Step 4 — Build Docker Image
+
+
+### Step 4 — Build Docker Image
+
 cd app
 docker build -t simple-k8s-app:v1 .
 docker images
-Step 5 — Test Docker Container
+
+
+### Step 5 — Test Docker Container
+
 docker run -d -p 8081:80 --name k8s-test simple-k8s-app:v1
 
 Open browser:
@@ -153,11 +162,14 @@ Stop container:
 
 docker stop k8s-test
 docker rm k8s-test
-Step 6 — Start Kubernetes Cluster
+
+### Step 6 — Start Kubernetes Cluster
+
 minikube start --driver=docker
 minikube status
 kubectl get nodes
-Step 7 — Create Kubernetes Namespace
+
+### Step 7 — Create Kubernetes Namespace
 k8s/namespace.yaml
 apiVersion: v1
 kind: Namespace
@@ -167,7 +179,9 @@ metadata:
 Apply:
 
 kubectl apply -f k8s/namespace.yaml
-Step 8 — Create ConfigMap
+
+### Step 8 — Create ConfigMap
+
 k8s/configmap.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -180,7 +194,9 @@ data:
 Apply:
 
 kubectl apply -f k8s/configmap.yaml
-Step 9 — Create Deployment
+
+### Step 9 — Create Deployment
+
 k8s/deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
@@ -200,17 +216,17 @@ spec:
       labels:
         app: simple-k8s-app
 
-    spec:
+   spec:
       containers:
       - name: simple-k8s-app
         image: madhan68/simple-k8s-app:latest
         imagePullPolicy: Always
 
-        ports:
-        - containerPort: 80
+   ports:
+       - containerPort: 80
 
-        envFrom:
-        - configMapRef:
+   envFrom:
+       - configMapRef:
             name: app-config
 
 Apply:
@@ -220,7 +236,9 @@ kubectl apply -f k8s/deployment.yaml
 Check pods:
 
 kubectl get pods -n devops-project
-Step 10 — Create Service
+
+### Step 10 — Create Service
+
 k8s/service.yaml
 apiVersion: v1
 kind: Service
@@ -242,16 +260,20 @@ spec:
 Apply:
 
 kubectl apply -f k8s/service.yaml
-Step 11 — Access the Application
+
+### Step 11 — Access the Application
+
 minikube service simple-k8s-service -n devops-project --url
 
 Open the generated URL in the browser.
 
-Step 12 — Verify Kubernetes Resources
+### Step 12 — Verify Kubernetes Resources
+
 kubectl get all -n devops-project
 kubectl describe deployment simple-k8s-app -n devops-project
 kubectl logs <pod-name> -n devops-project
-Step 13 — Setup CI/CD Pipeline
+
+### Step 13 — Setup CI/CD Pipeline
 
 Create workflow file:
 
@@ -266,12 +288,12 @@ on:
 jobs:
   docker:
 
-    runs-on: ubuntu-latest
+   runs-on: ubuntu-latest
 
-    steps:
+   steps:
       - uses: actions/checkout@v4
 
-      - name: Login to DockerHub
+   - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
@@ -282,7 +304,8 @@ jobs:
 
       - name: Push Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/simple-k8s-app:latest
-Step 14 — Add GitHub Secrets
+        
+### Step 14 — Add GitHub Secrets
 
 In GitHub Repository Settings → Secrets → Actions
 
@@ -290,19 +313,22 @@ Add:
 
 DOCKER_USERNAME = madhan68
 DOCKER_PASSWORD = <docker hub access token>
-Step 15 — Push Code
+
+### Step 15 — Push Code
+
 git add .
 git commit -m "Added Kubernetes deployment and CI/CD pipeline"
 git push origin main
 
 This triggers the GitHub Actions CI/CD pipeline.
 
-Step 16 — Redeploy Application
+### Step 16 — Redeploy Application
 
 After CI/CD pushes the image:
 
 kubectl rollout restart deployment simple-k8s-app -n devops-project
 CI/CD Pipeline Flow
+
 Developer changes code
         ↓
 Push to GitHub
@@ -316,84 +342,9 @@ Docker image pushed to Docker Hub
 Kubernetes deployment uses updated image
         ↓
 Application updated
-Troubleshooting
-Docker Port Conflict
-
-Error:
-
-address already in use
-
-Fix:
-
-docker run -d -p 8081:80 simple-k8s-app:v1
-ErrImageNeverPull
-
-Fix:
-
-minikube image load simple-k8s-app:v1
-Git Push Authentication Error
-
-Use GitHub Personal Access Token instead of password.
-
-Useful Commands
-kubectl get all -n devops-project
-kubectl get pods -n devops-project
-kubectl get svc -n devops-project
-kubectl describe pod <pod-name> -n devops-project
-kubectl logs <pod-name> -n devops-project
-minikube service simple-k8s-service -n devops-project --url
-Screenshots
-
-Include screenshots for:
-
-Kubernetes pods running
-
-deployment status
-
-service
-
-application in browser
-
-GitHub Actions success
-
-Docker Hub image
-
-GitHub repository
-
-Learning Outcome
-
-Through this project I learned:
-
-Docker containerization
-
-Kubernetes deployments
-
-Kubernetes services
-
-ConfigMap configuration
-
-Minikube cluster management
-
-GitHub Actions CI/CD
-
-Docker Hub image registry
-
-DevOps troubleshooting techniques
-
-Resume Description
-
-Kubernetes DevOps Project with CI/CD
-
-Built and deployed a Dockerized web application on Kubernetes using Minikube. Implemented Namespace, ConfigMap, Deployment, and Service, and created a GitHub Actions CI/CD pipeline to automatically build and push Docker images to Docker Hub on every push to the main branch.
-
-Author
-
-Madhan
 
 
----
 
-If you want, I can also give you a **professional DevOps project architecture diagram you can add to this README**, which makes your GitHub repo look much stronger to recruiters.
 
 
 
